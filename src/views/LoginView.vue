@@ -6,6 +6,11 @@ export default {
       password: '',
     };
   },
+  methods: {
+    login: function () {
+      this.$router.push('/home');
+    },
+  },
 };
 </script>
 
@@ -24,12 +29,22 @@ export default {
       <h2 class="title">사랑하는 사람들과 소통해보세요.</h2>
       <div class="login-form-wrap">
         <form class="login-form">
-          <input type="text" class="login-input" placeholder="name" />
-          <input type="password" class="login-input" placeholder="password" />
+          <input
+            v-model="name"
+            type="text"
+            class="login-input"
+            placeholder="name"
+          />
+          <input
+            v-model="password"
+            type="password"
+            class="login-input"
+            placeholder="password"
+          />
         </form>
       </div>
       <div class="button-wrap">
-        <button value="1" class="login-button">계속</button>
+        <button v-on:click="login" value="1" class="login-button">계속</button>
       </div>
     </div>
   </div>
