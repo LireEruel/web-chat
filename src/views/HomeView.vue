@@ -1,23 +1,28 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue';
-import { useCounterStore } from '../stores/CounterStore';
-import { useUserStore } from '../stores/UserStore';
-import { mapActions, mapState } from 'pinia';
-const counterStore = useCounterStore();
-</script>
+<template>
+  <vue-advanced-chat
+    :current-user-id="currentUserId"
+    :rooms="JSON.stringify(rooms)"
+    :messages="JSON.stringify(messages)"
+    :room-actions="JSON.stringify(roomActions)"
+  />
+</template>
 
 <script>
+import { register } from 'vue-advanced-chat';
+register();
+
 export default {
-  computed: {
-    ...mapState(useUserStore, ['name']),
-    ...mapState(useCounterStore, ['count']),
-    ...mapActions(useCounterStore, ['increment']),
+  data() {
+    return {
+      currentUserId: '1234',
+      rooms: [],
+      messages: [],
+      roomActions: [
+        { name: 'inviteUser', title: 'Invite User' },
+        { name: 'removeUser', title: 'Remove User' },
+        { name: 'deleteRoom', title: 'Delete Room' },
+      ],
+    };
   },
 };
 </script>
-<template>
-  <div>{{ name }}</div>
-  <div>ㅎㅇ</div>
-  <div :="count">{{ count }}</div>
-  <button v-on:click="increment">+</button>
-</template>
