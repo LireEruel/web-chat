@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useCounterStore } from '../stores/CounterStore';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 
@@ -27,6 +28,17 @@ const router = createRouter({
       component: HomeView,
     },
   ],
+});
+// router.beforeEach((to, from, next) => {
+//   // we wanted to use the store here
+//   if (store.isLoggedIn) next();
+//   else next('/login');
+// });
+router.beforeEach((to) => {
+  // ✅ This will work because the router starts its navigation after
+  // the router is installed and pinia will be installed too
+  //const counterStore = useCounterStore();
+  //if (to.meta.requiresAuth && !store.isLoggedIn) return '/login';
 });
 
 export default router;

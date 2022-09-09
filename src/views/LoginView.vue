@@ -1,3 +1,9 @@
+<script setup>
+import { useUserStore } from '../stores/UserStore';
+import { mapActions, mapState } from 'pinia';
+const userStore = useUserStore();
+</script>
+
 <script>
 export default {
   data() {
@@ -8,7 +14,17 @@ export default {
   },
   methods: {
     login: function () {
-      this.$router.push('/home');
+      if (this.name.length > 0) {
+        this.userStore.login(this.name);
+        this.$router.push('/home');
+      } else {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: '이름은 2글자 이상 입력해주세요!',
+          //footer: '<a href="">Why do I have this issue?</a>',
+        });
+      }
     },
   },
 };
@@ -35,12 +51,12 @@ export default {
             class="login-input"
             placeholder="name"
           />
-          <input
+          <!-- <input
             v-model="password"
             type="password"
             class="login-input"
             placeholder="password"
-          />
+          /> -->
         </form>
       </div>
       <div class="button-wrap">
