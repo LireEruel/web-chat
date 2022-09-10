@@ -27,20 +27,11 @@ export default {
       rooms: [
         {
           roomId: 1,
-          roomName: 'Room 1',
+          roomName: '만금이',
           avatar: 'assets/imgs/people.png',
-          unreadCount: 4,
-          index: 3,
-          lastMessage: {
-            content: 'Last message received',
-            senderId: 1234,
-            username: 'John Doe',
-            timestamp: '10:20',
-            saved: true,
-            distributed: false,
-            seen: false,
-            new: true,
-          },
+          unreadCount: 0,
+          index: 0,
+          lastMessage: this.messageStore.messages[0],
           users: [
             {
               _id: '1234',
@@ -77,8 +68,8 @@ export default {
     };
   },
   methods: {
-    sendMessage({ content, roomId, files, replyMessage }) {
-      this.messages = this.messageStore.addMessage(
+    async sendMessage({ content, roomId, files, replyMessage }) {
+      this.messages = await this.messageStore.addMessage(
         content,
         roomId,
         files,

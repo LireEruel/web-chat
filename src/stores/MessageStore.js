@@ -4,7 +4,6 @@ import { defineStore } from 'pinia/dist/pinia';
 export const useMessageStore = defineStore('MessageStore', {
   state: () => {
     return {
-      lastIndex: 2,
       messages: [
         {
           _id: '1',
