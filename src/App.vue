@@ -13,9 +13,9 @@ export default {
 </script>
 
 <template>
-  <div>
+  <!-- <div>
     <header>
-      <!-- <img
+      <img
         alt="Vue logo"
         class="logo"
         src="@/assets/logo.svg"
@@ -30,10 +30,10 @@ export default {
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">About</RouterLink>
         </nav>
-      </div> -->
-      <RouterView />
+      </div> 
     </header>
-  </div>
+  </div> -->
+  <RouterView />
 </template>
 
 <style scoped>
