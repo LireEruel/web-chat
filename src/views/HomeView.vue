@@ -1,3 +1,8 @@
+<script setup>
+import { useMessageStore } from '../stores/MessageStore';
+const messageStore = useMessageStore();
+</script>
+
 <template>
   <vue-advanced-chat
     :current-user-id="currentUserId"
@@ -7,6 +12,7 @@
     :height="'calc(100vh - 5vh)'"
     :rooms-loaded="roomsLoaded"
     :messagesLoaded="messagesLoaded"
+    @send-message="sendMessage($event.detail[0])"
   />
 </template>
 
@@ -37,7 +43,7 @@ export default {
           },
           users: [
             {
-              _id: 1234,
+              _id: '1234',
               username: 'John Doe',
               avatar: 'assets/imgs/doe.png',
               status: {
@@ -46,7 +52,7 @@ export default {
               },
             },
             {
-              _id: 4321,
+              _id: '4321',
               username: 'John Snow',
               avatar: 'assets/imgs/snow.png',
               status: {
@@ -56,24 +62,31 @@ export default {
             },
           ],
           typingUsers: [4321],
+          currentUserId: this.currentUserId,
         },
       ],
       roomsLoaded: true,
       messagesLoaded: true,
       loadingRooms: false,
-      messages: [
-        {
-          content: 'Last message received',
-          senderId: 1234,
-          username: 'John Doe',
-          timestamp: '10:20',
-          saved: true,
-          distributed: false,
-          seen: false,
-          new: true,
-        },
+      messages: this.messageStore.messages,
+      roomActions: [
+        { name: 'inviteUser', title: 'Invite User' },
+        { name: 'removeUser', title: 'Remove User' },
+        { name: 'deleteRoom', title: 'Delete Room' },
       ],
     };
+  },
+  methods: {
+    sendMessage({ content, roomId, files, replyMessage }) {
+      this.messages = this.messageStore.addMessage(
+        content,
+        roomId,
+        files,
+        replyMessage,
+        this.currentUserId
+      );
+      console.log(this.messages);
+    },
   },
 };
 </script>

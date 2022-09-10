@@ -1,4 +1,4 @@
-// stores/counter.js
+// stores/CounterStore.js
 import { defineStore } from 'pinia/dist/pinia';
 
 export const useCounterStore = defineStore('CounterStore', {
