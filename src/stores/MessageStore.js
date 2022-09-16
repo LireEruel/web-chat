@@ -15,6 +15,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
       distributed: false,
       seen: false,
       new: true,
+      date: "13 November",
     },
   ];
   function addMessage(content, roomId, files, replyMessage, senderId) {
