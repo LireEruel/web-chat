@@ -20,6 +20,8 @@ export const useMessageStore = defineStore("MessageStore", () => {
   function addMessage(content, roomId, files, replyMessage, senderId) {
     lastIndex++;
     const time = new Date();
+    const minutes =
+      time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
     //console.log(time.getHours() + ":" + time.getMinutes());
     const chat = {};
     chat.content = content;
@@ -27,7 +29,8 @@ export const useMessageStore = defineStore("MessageStore", () => {
     chat.files = files;
     chat.replyMessage = replyMessage;
     chat._id = lastIndex;
-    chat.timestamp = time.getHours() + ":" + time.getMinutes();
+
+    chat.timestamp = time.getHours() + ":" + minutes;
     chat.senderId = senderId;
     chat.saved = true;
     chat.seen = false;
