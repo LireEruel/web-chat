@@ -1,6 +1,8 @@
 <script setup>
 import { useMessageStore } from '../stores/MessageStore';
+import { useRoomStore } from '../stores/RoomStore';
 const messageStore = useMessageStore();
+const roomStore = useRoomStore();
 </script>
 
 <template>
@@ -10,7 +12,7 @@ const messageStore = useMessageStore();
     :messages="JSON.stringify(messages)"
     :room-actions="JSON.stringify(roomActions)"
     :height="'calc(100vh - 5vh)'"
-    :rooms-loaded="roomsLoaded"
+    :rooms-loaded="true"
     :messagesLoaded="messagesLoaded"
     @send-message="sendMessage($event.detail[0])"
   />
@@ -24,38 +26,7 @@ export default {
   data() {
     return {
       currentUserId: '1234',
-      rooms: [
-        {
-          roomId: 1,
-          roomName: '만금이',
-          avatar: 'assets/imgs/people.png',
-          unreadCount: 0,
-          index: 0,
-          lastMessage: this.messageStore.messages[0],
-          users: [
-            {
-              _id: '1234',
-              username: 'John Doe',
-              avatar: 'assets/imgs/doe.png',
-              status: {
-                state: 'online',
-                lastChanged: 'today, 14:30',
-              },
-            },
-            {
-              _id: '4321',
-              username: 'John Snow',
-              avatar: 'assets/imgs/snow.png',
-              status: {
-                state: 'offline',
-                lastChanged: '14 July, 20:00',
-              },
-            },
-          ],
-          typingUsers: [4321],
-          currentUserId: this.currentUserId,
-        },
-      ],
+      rooms: this.roomStore.rooms,
       roomsLoaded: true,
       messagesLoaded: true,
       loadingRooms: false,
@@ -76,6 +47,7 @@ export default {
         replyMessage,
         this.currentUserId
       );
+      this.messagesLoaded = true;
       console.log(this.messages);
     },
   },

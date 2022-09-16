@@ -7,6 +7,7 @@ export const useUserStore = defineStore('UserStore', {
       name: '',
       password: '',
       isLoggedIn: false,
+      userId: '1234',
     };
   },
   actions: {
