@@ -15,6 +15,7 @@ const roomStore = useRoomStore();
     :rooms-loaded="true"
     :messagesLoaded="messagesLoaded"
     @send-message="sendMessage($event.detail[0])"
+    @fetch-messages="onFetchMessages"
   />
 </template>
 
@@ -28,9 +29,9 @@ export default {
       currentUserId: '1234',
       rooms: this.roomStore.rooms,
       roomsLoaded: true,
-      messagesLoaded: true,
+      messagesLoaded: false,
       loadingRooms: false,
-      messages: this.messageStore.messages,
+      messages: [],
       roomActions: [
         { name: 'inviteUser', title: 'Invite User' },
         { name: 'removeUser', title: 'Remove User' },
@@ -50,6 +51,13 @@ export default {
       this.messagesLoaded = true;
       console.log(this.messages);
     },
+    onFetchMessages() {
+      setTimeout(() => {
+        this.messages = this.messageStore.messages
+        this.messagesLoaded = true;
+      });
+    },
+ 
   },
 };
 </script>
