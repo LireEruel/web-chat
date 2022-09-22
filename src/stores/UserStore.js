@@ -4,7 +4,7 @@ import logo from "@/assets/logo.svg";
 export const useUserStore = defineStore("UserStore", {
   state: () => {
     return {
-      username: "",
+      username: localStorage.getItem("username") || "",
       password: "",
       isLoggedIn: false,
       userId: "1234",
@@ -18,6 +18,7 @@ export const useUserStore = defineStore("UserStore", {
   actions: {
     login(username) {
       this.username = username;
+      localStorage.setItem("username", username);
     },
   },
 });
