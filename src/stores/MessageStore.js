@@ -1,37 +1,36 @@
 // stores/MessageStore.js
 import { defineStore } from "pinia/dist/pinia";
+import util from "../function/util";
 import { useRoomStore } from "./RoomStore";
+import { useUserStore } from "./UserStore";
 export const useMessageStore = defineStore("MessageStore", () => {
   const roomStore = useRoomStore();
+  const user = useUserStore();
   let lastIndex = 1;
   let messages = [
     {
       _id: "1",
-      content: "Last message received",
-      senderId: "1234",
+      content: "Hello~" + user.username,
+      senderId: "4321",
       username: "John Doe",
-      timestamp: "10:20",
+      timestamp: "23:18",
       saved: true,
       distributed: false,
       seen: false,
       new: true,
-      date: "13 November",
+      date: "25 April",
     },
   ];
   function addMessage(content, roomId, files, replyMessage, senderId) {
     lastIndex++;
-    const time = new Date();
-    const minutes =
-      time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
-    //console.log(time.getHours() + ":" + time.getMinutes());
     const chat = {};
     chat.content = content;
     chat.roomId = roomId;
     chat.files = files;
     chat.replyMessage = replyMessage;
     chat._id = lastIndex;
-
-    chat.timestamp = time.getHours() + ":" + minutes;
+    chat.date = util.getDate();
+    chat.timestamp = util.getTimeStamp();
     chat.senderId = senderId;
     chat.saved = true;
     chat.seen = false;
