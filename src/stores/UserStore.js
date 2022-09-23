@@ -8,7 +8,7 @@ export const useUserStore = defineStore("UserStore", {
       password: "",
       isLoggedIn: false,
       userId: "1234",
-      avatar: "@/assets/logo.svg",
+      avatar: logo,
       status: {
         state: "online",
         lastChanged: "today, 14:30",

@@ -7,6 +7,9 @@
   min-height: 600px;
   padding-bottom: 50px;
   position: absolute;
+  --blue : #1976d2;
+  --white : #fff;
+  --grey : #d2d6da;
 }
 
 a,
@@ -14,6 +17,33 @@ a,
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
+}
+button {
+  background-color: var(--blue);
+  color : var(--white);
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding : 8px 12px;
+  margin-left: 10px;
+  border: none;
+  font-size: 14px;
+  transition: 0.3s;
+  vertical-align: middle;
+}
+input {
+  padding : 5px;
+  width: 140px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid var(--grey);
+  outline: none;
+  font-size: 14px;
+  vertical-align: middle;
+  -webkit-appearance: none;
+}
+button:hover {
+  opacity: 0.8;
 }
 
 @media (hover: hover) {

@@ -1,21 +1,31 @@
 <script setup>
 import { useMessageStore } from '../stores/MessageStore';
 import { useRoomStore } from '../stores/RoomStore';
+import "../assets/chat_view.css";
 const messageStore = useMessageStore();
 const roomStore = useRoomStore();
 </script>
 
 <template>
+  	<form v-if="addNewRoom" @submit.prevent="createRoom" :class="{newRoomForm : true}">
+			<input v-model="addRoomUsername" type="text" placeholder="Add username" />
+			<button type="submit" :disabled="disableForm || !addRoomUsername">
+				Create Room
+			</button>
+			<button class="button-cancel" @click="addNewRoom = false">Cancel</button>
+		</form>
+
   <vue-advanced-chat
     :current-user-id="currentUserId"
     :rooms="JSON.stringify(rooms)"
     :messages="JSON.stringify(messages)"
     :room-actions="JSON.stringify(roomActions)"
-    :height="'calc(100vh - 5vh)'"
+    :height="'calc(100vh - 10vh)'"
     :rooms-loaded="true"
     :messagesLoaded="messagesLoaded"
     @send-message="sendMessage($event.detail[0])"
     @fetch-messages="onFetchMessages"
+    @add-room="addRoom($event.detail[0])"
   />
 </template>
 
@@ -32,6 +42,14 @@ export default {
       messagesLoaded: false,
       loadingRooms: false,
       messages: [],
+      disableForm: false,
+			addNewRoom: null,
+			addRoomUsername: '',
+			inviteRoomId: null,
+			invitedUsername: '',
+			removeRoomId: null,
+			removeUserId: '',
+			removeUsers: [],
       roomActions: [
         { name: 'inviteUser', title: 'Invite User' },
         { name: 'removeUser', title: 'Remove User' },
@@ -57,7 +75,10 @@ export default {
         this.messagesLoaded = true;
       });
     },
- 
+    addRoom() {
+			//this.resetForms()
+			this.addNewRoom = true
+		},
   },
 };
 </script>
