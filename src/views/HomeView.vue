@@ -1,9 +1,11 @@
 <script setup>
 import { useMessageStore } from '../stores/MessageStore';
 import { useRoomStore } from '../stores/RoomStore';
+import { useUserStore } from '../stores/UserStore';
 import "../assets/chat_view.css";
 const messageStore = useMessageStore();
 const roomStore = useRoomStore();
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -79,6 +81,21 @@ export default {
 			//this.resetForms()
 			this.addNewRoom = true
 		},
+    async createRoom () {
+      /**
+       *  todo list 
+       *  1. add user해서 새로운 유저 id 받아오기
+       *  2. 새 유저 id, 지금 유저 id로 새 방 만들기
+       * 
+       */
+      const newUserId= await this.userStore.addUser(this.addRoomUsername);
+      this.addNewRoom = false;
+      this.addRoomUsername = ''
+      
+      /**
+       *방 목록 업데이트
+       */
+    }
   },
 };
 </script>
