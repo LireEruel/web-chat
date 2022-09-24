@@ -2,13 +2,14 @@
 import { defineStore } from "pinia/dist/pinia";
 import { useUserStore } from "./UserStore";
 import dog_profile from "../assets/imgs/dog_profile.jpg";
+import logo from "../assets/logo.svg";
 import util from "../function/util";
 export const useRoomStore = defineStore("RoomStore", () => {
   const userStore = useUserStore();
   let lastIndex = 1;
   const rooms = [
     {
-      roomId: 1,
+      roomId: "1",
       roomName: "만금이",
       avatar: dog_profile,
       unreadCount: 0,
@@ -37,6 +38,86 @@ export const useRoomStore = defineStore("RoomStore", () => {
         {
           _id: "4321",
           username: "John Snow",
+          avatar: "@/assets/logo.svg",
+          status: {
+            state: "online",
+            lastChanged: "14 July, 20:00",
+          },
+        },
+      ],
+      typingUsers: [1234],
+      currentUserId: userStore.userId,
+    },
+    {
+      roomId: "2",
+      roomName: "치타",
+      avatar: dog_profile,
+      unreadCount: 0,
+      index: 0,
+      lastMessage: {
+        _id: "2",
+        content: "Glad to see you" + userStore.username,
+        senderId: "2",
+        username: "치타",
+        timestamp: "18:22",
+        saved: true,
+        distributed: false,
+        seen: false,
+        new: true,
+      },
+      users: [
+        {
+          _id: "1234",
+          username: "만금이",
+          avatar: "@/assets/logo.svg",
+          status: {
+            state: "online",
+            lastChanged: "today, 14:30",
+          },
+        },
+        {
+          _id: "2",
+          username: "치타",
+          avatar: "@/assets/logo.svg",
+          status: {
+            state: "online",
+            lastChanged: "14 July, 20:00",
+          },
+        },
+      ],
+      typingUsers: [1234],
+      currentUserId: userStore.userId,
+    },
+    {
+      roomId: "3",
+      roomName: "낙타",
+      avatar: logo,
+      unreadCount: 0,
+      index: 0,
+      lastMessage: {
+        _id: "1",
+        content: "Hello~" + userStore.username,
+        senderId: "4321",
+        username: "낙타",
+        timestamp: "10:20",
+        saved: true,
+        distributed: false,
+        seen: false,
+        new: true,
+      },
+      users: [
+        {
+          _id: "1234",
+          username: "만금이",
+          avatar: "@/assets/logo.svg",
+          status: {
+            state: "online",
+            lastChanged: "today, 14:30",
+          },
+        },
+        {
+          _id: "3",
+          username: "낙타",
           avatar: "@/assets/logo.svg",
           status: {
             state: "online",

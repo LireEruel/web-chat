@@ -10,6 +10,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
   let messages = [
     {
       _id: "1",
+      roomId: "1",
       content: "Hello~" + UserStore.username,
       senderId: "4321",
       username: "John Doe",
@@ -44,6 +45,9 @@ export const useMessageStore = defineStore("MessageStore", () => {
   function getMessage() {
     return this.messages;
   }
+  function getRoomMessages(roomId) {
+    return this.messages.filter((message) => message.roomId == roomId);
+  }
 
-  return { messages, addMessage, getMessage };
+  return { messages, addMessage, getMessage, getRoomMessages };
 });

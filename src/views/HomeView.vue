@@ -25,8 +25,9 @@ const userStore = useUserStore();
     :height="'calc(100vh - 10vh)'"
     :rooms-loaded="true"
     :messagesLoaded="messagesLoaded"
+    :room-id="roomId"
     @send-message="sendMessage($event.detail[0])"
-    @fetch-messages="onFetchMessages"
+    @fetch-messages="fetchMessages($event.detail[0])"
     @add-room="addRoom($event.detail[0])"
   />
 </template>
@@ -39,6 +40,7 @@ export default {
   data() {
     return {
       currentUserId: '1234',
+
       rooms: this.roomStore.rooms,
       roomsLoaded: true,
       messagesLoaded: false,
@@ -57,6 +59,7 @@ export default {
         { name: 'removeUser', title: 'Remove User' },
         { name: 'deleteRoom', title: 'Delete Room' },
       ],
+      roomId : '',
     };
   },
   methods: {
@@ -71,9 +74,10 @@ export default {
       this.messagesLoaded = true;
       console.log(this.messages);
     },
-    onFetchMessages() {
-      setTimeout(() => {
-        this.messages = this.messageStore.messages
+    fetchMessages({ room, options = {} }) {
+      setTimeout(async () => {
+        this.roomId = room.roomId
+        this.messages = await this.messageStore.getRoomMessages(room.roomId)
         this.messagesLoaded = true;
       });
     },
