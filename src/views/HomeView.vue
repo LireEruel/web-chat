@@ -40,7 +40,6 @@ export default {
   data() {
     return {
       currentUserId: '1234',
-
       rooms: this.roomStore.rooms,
       roomsLoaded: true,
       messagesLoaded: false,
@@ -64,7 +63,7 @@ export default {
   },
   methods: {
     async sendMessage({ content, roomId, files, replyMessage }) {
-      this.messages = await this.messageStore.addMessage(
+      await this.messageStore.addMessage(
         content,
         roomId,
         files,
@@ -72,12 +71,12 @@ export default {
         this.currentUserId
       );
       this.messagesLoaded = true;
-      console.log(this.messages);
+      this.messages = this.messageStore.getRoomMessages(roomId)
     },
     fetchMessages({ room, options = {} }) {
       setTimeout(async () => {
         this.roomId = room.roomId
-        this.messages = await this.messageStore.getRoomMessages(room.roomId)
+        this.messages=  await this.messageStore.getRoomMessages(room.roomId);
         this.messagesLoaded = true;
       });
     },

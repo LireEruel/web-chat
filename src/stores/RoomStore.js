@@ -1,19 +1,20 @@
 // stores/RoomStore.js
 import { defineStore } from "pinia/dist/pinia";
 import { useUserStore } from "./UserStore";
+import { useMessageStore } from "./MessageStore";
 import dog_profile from "../assets/imgs/dog_profile.jpg";
-import logo from "../assets/logo.svg";
+import camel_profile from "../assets/imgs/camel.png";
 import util from "../function/util";
 export const useRoomStore = defineStore("RoomStore", () => {
   const userStore = useUserStore();
-  let lastIndex = 1;
+  const messageStore = useMessageStore();
+  let lastIndex = "3";
   const rooms = [
     {
       roomId: "1",
       roomName: "만금이",
       avatar: dog_profile,
       unreadCount: 0,
-      index: 0,
       lastMessage: {
         _id: "1",
         content: "Hello~" + userStore.username,
@@ -50,20 +51,15 @@ export const useRoomStore = defineStore("RoomStore", () => {
     },
     {
       roomId: "2",
-      roomName: "치타",
-      avatar: dog_profile,
+      roomName: "낙타",
+      avatar: camel_profile,
       unreadCount: 0,
-      index: 0,
       lastMessage: {
         _id: "2",
-        content: "Glad to see you" + userStore.username,
-        senderId: "2",
-        username: "치타",
-        timestamp: "18:22",
-        saved: true,
-        distributed: false,
-        seen: false,
-        new: true,
+        roomId: "2",
+        content: "Room created",
+        date: util.getDate(),
+        system: true,
       },
       users: [
         {
@@ -76,48 +72,8 @@ export const useRoomStore = defineStore("RoomStore", () => {
           },
         },
         {
-          _id: "2",
-          username: "치타",
-          avatar: "@/assets/logo.svg",
-          status: {
-            state: "online",
-            lastChanged: "14 July, 20:00",
-          },
-        },
-      ],
-      typingUsers: [1234],
-      currentUserId: userStore.userId,
-    },
-    {
-      roomId: "3",
-      roomName: "낙타",
-      avatar: logo,
-      unreadCount: 0,
-      index: 0,
-      lastMessage: {
-        _id: "1",
-        content: "Hello~" + userStore.username,
-        senderId: "4321",
-        username: "낙타",
-        timestamp: "10:20",
-        saved: true,
-        distributed: false,
-        seen: false,
-        new: true,
-      },
-      users: [
-        {
-          _id: "1234",
-          username: "만금이",
-          avatar: "@/assets/logo.svg",
-          status: {
-            state: "online",
-            lastChanged: "today, 14:30",
-          },
-        },
-        {
-          _id: "3",
-          username: "낙타",
+          _id: "4321",
+          username: "John Snow",
           avatar: "@/assets/logo.svg",
           status: {
             state: "online",
@@ -145,13 +101,13 @@ export const useRoomStore = defineStore("RoomStore", () => {
       roomName: newUser.username,
       avatar: newUser.avatar,
       unreadCount: 0,
-      index: 1,
+      index: 0,
       lastMessage: { content: "room created", timestamp: util.getTimeStamp() },
       users: [newUser, myInfo],
       typingUsers: [userStore.userId],
       currentUserId: userStore.userId,
     };
-
+    messageStore.addRoomCreatedMessage(this.lastIndex);
     this.rooms = [...this.rooms, newRoom];
     console.log(this.rooms);
     return this.rooms;
