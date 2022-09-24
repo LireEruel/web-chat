@@ -92,7 +92,6 @@ export const useMessageStore = defineStore("MessageStore", () => {
         message.edited = new Date();
       }
     });
-
     return this.messages;
   }
 
