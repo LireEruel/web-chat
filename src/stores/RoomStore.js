@@ -2,6 +2,7 @@
 import { defineStore } from "pinia/dist/pinia";
 import { useUserStore } from "./UserStore";
 import dog_profile from "../assets/imgs/dog_profile.jpg";
+import util from "../function/util";
 export const useRoomStore = defineStore("RoomStore", () => {
   const userStore = useUserStore();
   let lastIndex = 1;
@@ -64,7 +65,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
       avatar: newUser.avatar,
       unreadCount: 0,
       index: 1,
-      lastMessage: {},
+      lastMessage: { content: "room created", timestamp: util.getTimeStamp() },
       users: [newUser, myInfo],
       typingUsers: [userStore.userId],
       currentUserId: userStore.userId,
