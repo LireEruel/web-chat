@@ -55,8 +55,8 @@ export default {
 			removeUserId: '',
 			removeUsers: [],
       roomActions: [
-        { name: 'inviteUser', title: 'Invite User' },
-        { name: 'removeUser', title: 'Remove User' },
+        // { name: 'inviteUser', title: 'Invite User' },
+        // { name: 'removeUser', title: 'Remove User' },
         { name: 'deleteRoom', title: 'Delete Room' },
       ],
       roomId : '',
