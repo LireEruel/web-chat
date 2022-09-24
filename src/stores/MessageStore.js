@@ -6,7 +6,7 @@ import { useUserStore } from "./UserStore";
 export const useMessageStore = defineStore("MessageStore", () => {
   const roomStore = useRoomStore();
   const UserStore = useUserStore();
-  let lastIndex = 1;
+  let lastIndex = "2";
   let messages = [
     {
       _id: "0",
@@ -84,6 +84,17 @@ export const useMessageStore = defineStore("MessageStore", () => {
     console.log(this.messages);
     return newMessages;
   }
+  function editMessage(messageId, content) {
+    this.messages.map((message) => {
+      console.log(message);
+      if (message._id == messageId) {
+        message.content = content;
+        message.edited = new Date();
+      }
+    });
+
+    return this.messages;
+  }
 
   return {
     messages,
@@ -92,5 +103,6 @@ export const useMessageStore = defineStore("MessageStore", () => {
     getRoomMessages,
     addRoomCreatedMessage,
     deleteMessage,
+    editMessage,
   };
 });

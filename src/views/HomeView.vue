@@ -31,6 +31,7 @@ const userStore = useUserStore();
     @add-room="addRoom($event.detail[0])"
     @room-action-handler="menuActionHandler($event.detail[0])"
     @delete-message="deleteMessage($event.detail[0])"
+    @edit-message="editMessage($event.detail[0])"
   />
 </template>
 
@@ -62,6 +63,7 @@ export default {
       ],
       messageSelectionActions: [{ name: 'deleteMessages', title: 'Delete' }],
       roomId : '',
+      
     };
   },
   methods: {
@@ -118,6 +120,10 @@ export default {
     },
     deleteMessage({message, roomId}) {
       this.messages = this.messageStore.deleteMessage(message._id)
+    },
+    editMessage({ messageId, newContent, roomId, files }) {
+      const newMessage = { edited: new Date() }
+      this.message = this.messageStore.editMessage(messageId, newContent)
     }
   },
 };
