@@ -9,6 +9,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
   const userStore = useUserStore();
   const messageStore = useMessageStore();
   let lastIndex = "3";
+  const myInfo = userStore.findUser(userStore.userId);
   const rooms = [
     {
       roomId: "1",
@@ -28,7 +29,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
       },
       users: [
         {
-          _id: "1234",
+          _id: "4321",
           username: "만금이",
           avatar: "@/assets/logo.svg",
           status: {
@@ -36,17 +37,9 @@ export const useRoomStore = defineStore("RoomStore", () => {
             lastChanged: "today, 14:30",
           },
         },
-        {
-          _id: "4321",
-          username: "John Snow",
-          avatar: "@/assets/logo.svg",
-          status: {
-            state: "online",
-            lastChanged: "14 July, 20:00",
-          },
-        },
+        myInfo,
       ],
-      typingUsers: [1234],
+      typingUsers: [userStore.userId],
       currentUserId: userStore.userId,
     },
     {
@@ -62,18 +55,10 @@ export const useRoomStore = defineStore("RoomStore", () => {
         system: true,
       },
       users: [
-        {
-          _id: "1234",
-          username: "만금이",
-          avatar: "@/assets/logo.svg",
-          status: {
-            state: "online",
-            lastChanged: "today, 14:30",
-          },
-        },
+        myInfo,
         {
           _id: "4321",
-          username: "John Snow",
+          username: "낙타",
           avatar: "@/assets/logo.svg",
           status: {
             state: "online",

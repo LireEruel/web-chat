@@ -21,7 +21,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
       roomId: "1",
       content: "Hello~" + UserStore.username,
       senderId: "4321",
-      username: "John Doe",
+      username: "만금이",
       timestamp: "23:18",
       saved: true,
       distributed: false,
