@@ -10,6 +10,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
   let messages = [
     {
       _id: "0",
+      senderId: "0",
       roomId: "1",
       content: "Room created",
       date: "25 April",
@@ -30,6 +31,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
     },
     {
       _id: "2",
+      senderId: "0",
       roomId: "2",
       content: "Room created",
       date: util.getDate(),
@@ -63,6 +65,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
     chat.content = "Room created";
     chat.date = util.getDate();
     chat.timestamp = util.getTimeStamp();
+    chat.senderId = "0";
     chat.system = true;
     this.messages = [...this.messages, chat];
   }

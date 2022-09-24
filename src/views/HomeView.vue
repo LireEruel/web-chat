@@ -29,6 +29,7 @@ const userStore = useUserStore();
     @send-message="sendMessage($event.detail[0])"
     @fetch-messages="fetchMessages($event.detail[0])"
     @add-room="addRoom($event.detail[0])"
+    @room-action-handler="menuActionHandler($event.detail[0])"
   />
 </template>
 
@@ -89,7 +90,6 @@ export default {
        *  todo list 
        *  1. add user해서 새로운 유저 id 받아오기
        *  2. 새 유저 id, 지금 유저 id로 새 방 만들기
-       * 
        */
       const newUserId= await this.userStore.addUser(this.addRoomUsername);
       this.addNewRoom = false;
@@ -99,6 +99,20 @@ export default {
       /**
        *방 목록 업데이트
        */
+    },
+    menuActionHandler({ action, roomId }) {
+			switch (action.name) {
+				// case 'inviteUser':
+				// 	return this.inviteUser(roomId)
+				// case 'removeUser':
+				// 	return this.removeUser(roomId)
+				case 'deleteRoom':
+					return this.deleteRoom(roomId)
+			}
+		},
+    deleteRoom (roomId) {
+      this.rooms = this.roomStore.deleteRoom(roomId);
+      this.roomId = this.rooms[0].roomId
     }
   },
 };

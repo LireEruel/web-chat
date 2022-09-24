@@ -112,5 +112,10 @@ export const useRoomStore = defineStore("RoomStore", () => {
     console.log(this.rooms);
     return this.rooms;
   }
-  return { rooms, lastIndex, updateRoomMessage, addRoom };
+  function deleteRoom(roomId) {
+    const newRooms = this.rooms.filter((room) => room.roomId !== roomId);
+    this.rooms = newRooms;
+    return newRooms;
+  }
+  return { rooms, lastIndex, updateRoomMessage, addRoom, deleteRoom };
 });
