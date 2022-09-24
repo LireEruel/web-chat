@@ -73,7 +73,6 @@ export const useMessageStore = defineStore("MessageStore", () => {
     return this.messages;
   }
   function getRoomMessages(roomId) {
-    console.log(this.messages.filter((message) => message.roomId == roomId));
     return this.messages.filter((message) => message.roomId == roomId);
   }
 
