@@ -4,7 +4,7 @@ import { useUserStore } from "./UserStore";
 import dog_profile from "../assets/imgs/dog_profile.jpg";
 export const useRoomStore = defineStore("RoomStore", () => {
   const userStore = useUserStore();
-
+  let lastIndex = 1;
   const rooms = [
     {
       roomId: 1,
@@ -57,19 +57,22 @@ export const useRoomStore = defineStore("RoomStore", () => {
   function addRoom(userId) {
     const newUser = userStore.findUser(userId);
     const myInfo = userStore.findUser(userStore.userId);
+    this.lastIndex += 1;
     const newRoom = {
-      roomId: 1,
+      roomId: this.lastIndex,
       roomName: newUser.username,
       avatar: newUser.avatar,
       unreadCount: 0,
-      index: 0,
-      lastMessage: null,
+      index: 1,
+      lastMessage: {},
       users: [newUser, myInfo],
       typingUsers: [userStore.userId],
       currentUserId: userStore.userId,
     };
+
     this.rooms = [...this.rooms, newRoom];
+    console.log(this.rooms);
     return this.rooms;
   }
-  return { rooms, updateRoomMessage, addRoom };
+  return { rooms, lastIndex, updateRoomMessage, addRoom };
 });

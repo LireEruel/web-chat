@@ -15,8 +15,10 @@ export const useUserStore = defineStore("UserStore", () => {
   };
   let users = [
     {
-      userId: "1234",
+      _id: userId,
+      userId: userId,
       avatar: logo,
+      username: username,
       status: {
         state: "online",
         lastChanged: "today, 14:30",
@@ -30,6 +32,7 @@ export const useUserStore = defineStore("UserStore", () => {
   function addUser(username) {
     this.lastUserId += 1;
     const newUser = {};
+    newUser._id = this.lastUserId;
     newUser.userId = this.lastUserId;
     newUser.username = username;
     (newUser.avatar = logo),
