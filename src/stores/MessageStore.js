@@ -75,6 +75,15 @@ export const useMessageStore = defineStore("MessageStore", () => {
   function getRoomMessages(roomId) {
     return this.messages.filter((message) => message.roomId == roomId);
   }
+  function deleteMessage(messageId) {
+    console.log(this.messages);
+    const newMessages = this.messages.filter(
+      (message) => message._id != messageId
+    );
+    this.messages = newMessages;
+    console.log(this.messages);
+    return newMessages;
+  }
 
   return {
     messages,
@@ -82,5 +91,6 @@ export const useMessageStore = defineStore("MessageStore", () => {
     getMessage,
     getRoomMessages,
     addRoomCreatedMessage,
+    deleteMessage,
   };
 });

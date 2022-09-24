@@ -30,6 +30,7 @@ const userStore = useUserStore();
     @fetch-messages="fetchMessages($event.detail[0])"
     @add-room="addRoom($event.detail[0])"
     @room-action-handler="menuActionHandler($event.detail[0])"
+    @delete-message="deleteMessage($event.detail[0])"
   />
 </template>
 
@@ -59,6 +60,7 @@ export default {
         // { name: 'removeUser', title: 'Remove User' },
         { name: 'deleteRoom', title: 'Delete Room' },
       ],
+      messageSelectionActions: [{ name: 'deleteMessages', title: 'Delete' }],
       roomId : '',
     };
   },
@@ -113,6 +115,9 @@ export default {
     deleteRoom (roomId) {
       this.rooms = this.roomStore.deleteRoom(roomId);
       this.roomId = this.rooms[0].roomId
+    },
+    deleteMessage({message, roomId}) {
+      this.messages = this.messageStore.deleteMessage(message._id)
     }
   },
 };
