@@ -50,7 +50,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
   ];
   function updateRoomMessage(chat) {
     //console.log(chat);
-    const room = rooms.find((room) => room.roomId == chat.roomId);
+    const room = this.rooms.find((room) => room.roomId == chat.roomId);
     // console.log(room);
     // console.log(rooms[0].roomId == chat.roomId);
     room.lastMessage = chat;
