@@ -5,12 +5,12 @@ import { useRoomStore } from "./RoomStore";
 import { useUserStore } from "./UserStore";
 export const useMessageStore = defineStore("MessageStore", () => {
   const roomStore = useRoomStore();
-  const user = useUserStore();
+  const UserStore = useUserStore();
   let lastIndex = 1;
   let messages = [
     {
       _id: "1",
-      content: "Hello~" + user.username,
+      content: "Hello~" + UserStore.username,
       senderId: "4321",
       username: "John Doe",
       timestamp: "23:18",
@@ -42,7 +42,6 @@ export const useMessageStore = defineStore("MessageStore", () => {
     return this.messages;
   }
   function getMessage() {
-    console.log(this.messages);
     return this.messages;
   }
 

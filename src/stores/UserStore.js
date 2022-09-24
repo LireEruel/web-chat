@@ -23,7 +23,6 @@ export const useUserStore = defineStore("UserStore", () => {
       },
     },
   ];
-
   function login(username) {
     this.username = username;
     localStorage.setItem("username", username);
@@ -41,6 +40,9 @@ export const useUserStore = defineStore("UserStore", () => {
     this.users.push(newUser);
     return newUser.userId;
   }
+  function findUser(userId) {
+    return this.users.find((user) => user.userId == userId);
+  }
   return {
     lastUserId,
     username,
@@ -52,5 +54,6 @@ export const useUserStore = defineStore("UserStore", () => {
     users,
     login,
     addUser,
+    findUser,
   };
 });

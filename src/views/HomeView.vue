@@ -91,7 +91,8 @@ export default {
       const newUserId= await this.userStore.addUser(this.addRoomUsername);
       this.addNewRoom = false;
       this.addRoomUsername = ''
-      
+      const newRoomList = await this.roomStore.addRoom(newUserId);
+      this.rooms = newRoomList;
       /**
        *방 목록 업데이트
        */

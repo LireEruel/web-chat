@@ -3,7 +3,7 @@ import { defineStore } from "pinia/dist/pinia";
 import { useUserStore } from "./UserStore";
 import dog_profile from "../assets/imgs/dog_profile.jpg";
 export const useRoomStore = defineStore("RoomStore", () => {
-  const user = useUserStore();
+  const userStore = useUserStore();
 
   const rooms = [
     {
@@ -14,7 +14,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
       index: 0,
       lastMessage: {
         _id: "1",
-        content: "Hello~" + user.username,
+        content: "Hello~" + userStore.username,
         senderId: "4321",
         username: "만금이",
         timestamp: "10:20",
@@ -44,7 +44,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
         },
       ],
       typingUsers: [1234],
-      currentUserId: user.userId,
+      currentUserId: userStore.userId,
     },
   ];
   function updateRoomMessage(chat) {
@@ -54,5 +54,22 @@ export const useRoomStore = defineStore("RoomStore", () => {
     // console.log(rooms[0].roomId == chat.roomId);
     room.lastMessage = chat;
   }
-  return { rooms, updateRoomMessage };
+  function addRoom(userId) {
+    const newUser = userStore.findUser(userId);
+    const myInfo = userStore.findUser(userStore.userId);
+    const newRoom = {
+      roomId: 1,
+      roomName: newUser.username,
+      avatar: newUser.avatar,
+      unreadCount: 0,
+      index: 0,
+      lastMessage: null,
+      users: [newUser, myInfo],
+      typingUsers: [userStore.userId],
+      currentUserId: userStore.userId,
+    };
+    this.rooms = [...this.rooms, newRoom];
+    return this.rooms;
+  }
+  return { rooms, updateRoomMessage, addRoom };
 });
