@@ -35,6 +35,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
       _id: "2",
       senderId: "0",
       roomId: "2",
+      timestamp: "07:07",
       content: "Room created",
       date: util.getDate(),
       system: true,

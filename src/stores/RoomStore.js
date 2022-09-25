@@ -53,6 +53,7 @@ export const useRoomStore = defineStore("RoomStore", () => {
         content: "Room created",
         date: util.getDate(),
         system: true,
+        timestamp: "07:07",
       },
       users: [
         myInfo,
