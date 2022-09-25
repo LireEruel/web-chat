@@ -47,21 +47,15 @@ export default {
       <div class="login-form-wrap">
         <form class="login-form" @submit.prevent="login" >
           <input
-            v-model.lazy="name"
+            v-model="name"
             type="text"
             class="login-input"
             placeholder="name"
           />
-          <!-- <input
-            v-model="password"
-            type="password"
-            class="login-input"
-            placeholder="password"
-          /> -->
+          <div class="button-wrap">
+            <button  type="submit" value="1" class="login-button">계속</button>
+          </div>
         </form>
-      </div>
-      <div class="button-wrap">
-        <button v-on:click="login" value="1" class="login-button">계속</button>
       </div>
     </div>
   </div>
