@@ -15,17 +15,17 @@ export default {
   methods: {
     login: function () {
       console.log(this.name)
-      if (this.name.length > 0) {
+      //if (this.name.length > 0) {
         this.userStore.login(this.name);
         this.$router.push('/home');
-      } else {
-        this.$swal({
-          icon: 'error',
-          title: 'Oops...',
-          text: '이름은 2글자 이상 입력해주세요!',
-          //footer: '<a href="">Why do I have this issue?</a>',
-        });
-      }
+      //} else {
+      //   this.$swal({
+      //     icon: 'error',
+      //     title: 'Oops...',
+      //     text: '이름은 2글자 이상 입력해주세요!',
+      //     //footer: '<a href="">Why do I have this issue?</a>',
+      //   });
+      // }
     },
   },
 };
