@@ -123,11 +123,13 @@ export default {
       this.roomId = this.rooms[0].roomId
     },
     deleteMessage({message, roomId}) {
-      this.messages = this.messageStore.deleteMessage(message._id)
+      const newMessage =  this.messageStore.deleteMessage(message._id)
+      this.messages= this.messageStore.getRoomMessages(roomId);
     },
     editMessage({ messageId, newContent, roomId, files }) {
       const newMessage = { edited: new Date() }
-      this.message = this.messageStore.editMessage(messageId, newContent)
+      this.messageStore.editMessage(messageId, newContent)
+      this.messages= this.messageStore.getRoomMessages(roomId);
     }
   },
 };

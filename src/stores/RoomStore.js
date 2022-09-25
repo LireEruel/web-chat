@@ -94,7 +94,6 @@ export const useRoomStore = defineStore("RoomStore", () => {
     };
     messageStore.addRoomCreatedMessage(this.lastIndex);
     this.rooms = [...this.rooms, newRoom];
-    console.log(this.rooms);
     return this.rooms;
   }
   function deleteRoom(roomId) {

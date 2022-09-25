@@ -81,17 +81,13 @@ export const useMessageStore = defineStore("MessageStore", () => {
     return this.messages.filter((message) => message.roomId == roomId);
   }
   function deleteMessage(messageId) {
-    console.log(this.messages);
     const newMessages = this.messages.filter(
       (message) => message._id != messageId
     );
     this.messages = newMessages;
-    console.log(this.messages);
-    return newMessages;
   }
   function editMessage(messageId, content) {
     this.messages.map((message) => {
-      console.log(message);
       if (message._id == messageId) {
         message.content = content;
         message.edited = new Date();
