@@ -4,32 +4,6 @@ import { mapActions, mapState } from 'pinia';
 const userStore = useUserStore();
 </script>
 
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      password: '',
-    };
-  },
-  methods: {
-    login () {
-      console.log(this.name)
-      if (this.name.length > 0) {
-        this.userStore.login(this.name);
-        this.$router.push('/home');
-      } else {
-        this.$swal({
-          icon: 'error',
-          title: 'Oops...',
-          text: '이름은 2글자 이상 입력해주세요!',
-          //footer: '<a href="">Why do I have this issue?</a>',
-        });
-      }
-    },
-  },
-};
-</script>
 
 <template>
   <div class="login">
@@ -61,6 +35,34 @@ export default {
   </div>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        name: '',
+        password: '',
+      };
+    },
+    methods: {
+      login() 
+      {
+        console.log(this.name)
+        if (this.name.length > 0) {
+          this.userStore.login(this.name);
+          this.$router.push('/home');
+        } else {
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: '이름은 2글자 이상 입력해주세요!',
+            //footer: '<a href="">Why do I have this issue?</a>',
+          });
+        }
+      },
+    },
+  };
+  </script>
+  
 <style>
 .login {
   display: table-cell;
