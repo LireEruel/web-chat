@@ -5,7 +5,7 @@ import { useRoomStore } from "./RoomStore";
 import { useUserStore } from "./UserStore";
 export const useMessageStore = defineStore("MessageStore", () => {
   const roomStore = useRoomStore();
-  const UserStore = useUserStore();
+  const userStore = useUserStore();
   let lastIndex = "2";
   let messages = [
     {
@@ -15,11 +15,12 @@ export const useMessageStore = defineStore("MessageStore", () => {
       content: "Room created",
       date: "25 April",
       system: true,
+      disableReactions: true,
     },
     {
       _id: "1",
       roomId: "1",
-      content: "Hello~" + UserStore.username,
+      content: "Hello~" + userStore.username,
       senderId: "4321",
       username: "만금이",
       timestamp: "23:18",
@@ -28,6 +29,7 @@ export const useMessageStore = defineStore("MessageStore", () => {
       seen: false,
       new: true,
       date: "25 April",
+      disableReactions: true,
     },
     {
       _id: "2",
@@ -36,23 +38,26 @@ export const useMessageStore = defineStore("MessageStore", () => {
       content: "Room created",
       date: util.getDate(),
       system: true,
+      disableReactions: true,
     },
   ];
   function addMessage(content, roomId, files, replyMessage, senderId) {
     lastIndex++;
     const chat = {};
+    chat._id = lastIndex;
     chat.content = content;
     chat.roomId = roomId;
     chat.files = files;
     chat.replyMessage = replyMessage;
-    chat._id = lastIndex;
     chat.date = util.getDate();
     chat.timestamp = util.getTimeStamp();
     chat.senderId = senderId;
     chat.saved = true;
     chat.seen = false;
     chat.new = true;
+    chat.username = userStore.username;
     chat.distributed = false;
+    chat.disableReactions = true;
     this.messages = [...this.messages, chat];
     roomStore.updateRoomMessage(chat);
     return this.messages;
