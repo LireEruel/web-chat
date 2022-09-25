@@ -20,7 +20,6 @@ const userStore = useUserStore();
       <h2 class="title">사랑하는 사람들과 소통해보세요.</h2>
       <div class="login-form-wrap">
         <form class="login-form" @submit.prevent="login" >
-          <p>{{name}}</p>
           <input
             v-model="name"
             type="text"
