@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     login: function () {
+      console.log(this.name)
       if (this.name.length > 0) {
         this.userStore.login(this.name);
         this.$router.push('/home');
@@ -46,7 +47,7 @@ export default {
       <div class="login-form-wrap">
         <form class="login-form" @submit.prevent="login" >
           <input
-            v-model="name"
+            v-model.lazy="name"
             type="text"
             class="login-input"
             placeholder="name"
