@@ -26,10 +26,14 @@ const userStore = useUserStore();
     :rooms-loaded="true"
     :messagesLoaded="messagesLoaded"
     :room-id="roomId"
+    :message-selection-actions="JSON.stringify(messageSelectionActions)"
     @send-message="sendMessage($event.detail[0])"
     @fetch-messages="fetchMessages($event.detail[0])"
     @add-room="addRoom($event.detail[0])"
     @room-action-handler="menuActionHandler($event.detail[0])"
+    @message-selection-action-handler="
+				messageSelectionActionHandler($event.detail[0])
+			"
     @delete-message="deleteMessage($event.detail[0])"
     @edit-message="editMessage($event.detail[0])"
   />
@@ -46,6 +50,7 @@ export default {
       rooms: this.roomStore.rooms,
       roomsLoaded: true,
       messagesLoaded: false,
+      messageSelectionActions: [{ name: 'deleteMessages', title: 'Delete' }],
       loadingRooms: false,
       messages: [],
       disableForm: false,
@@ -103,6 +108,14 @@ export default {
 				// 	return this.removeUser(roomId)
 				case 'deleteRoom':
 					return this.deleteRoom(roomId)
+			}
+		},
+    messageSelectionActionHandler({ action, messages, roomId }) {
+			switch (action.name) {
+				case 'deleteMessages':
+					messages.forEach(message => {
+						this.deleteMessage({ message, roomId })
+					})
 			}
 		},
     deleteRoom (roomId) {
