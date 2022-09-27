@@ -7,5 +7,3 @@ Vue.js로 웹 채팅의 Front-end 부분을 구현하는 프로젝트입니다.
 
 UI는 vue-advanced-chat을 사용했습니다. 😗
 ![image](https://user-images.githubusercontent.com/47496422/192127803-28c7dabf-a06d-4156-b781-f42c86ee8ea1.png)
-
-http://219.255.6.129:15000/web-chat/
